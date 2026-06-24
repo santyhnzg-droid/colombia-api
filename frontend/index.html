@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colombia Interactiva</title>
+
+  <!-- Leaflet CSS (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-logo">🇨🇴</div>
+    <div class="header-text">
+      <h1>Colombia Interactiva</h1>
+      <p>Haz clic en un departamento para explorar su información</p>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Mapa -->
+    <section class="mapa-contenedor">
+      <div id="mapa"></div>
+    </section>
+
+    <!-- Panel lateral -->
+    <aside class="panel" id="panel">
+
+      <!-- Estado inicial -->
+      <div class="panel-vacio" id="panel-vacio">
+        <span class="panel-vacio-icono">🗺️</span>
+        <p>Selecciona un departamento en el mapa para ver su información.</p>
+      </div>
+
+      <!-- Contenido del departamento seleccionado (oculto hasta que se seleccione) -->
+      <div class="panel-contenido" id="panel-contenido" hidden>
+
+        <div class="dept-header">
+          <h2 class="dept-nombre" id="dept-nombre">—</h2>
+          <span class="dept-region" id="dept-region">—</span>
+        </div>
+
+        <p class="dept-descripcion" id="dept-descripcion">—</p>
+
+        <div class="dept-stats">
+          <div class="stat">
+            <span class="stat-valor" id="dept-superficie">—</span>
+            <span class="stat-etiqueta">Superficie (km²)</span>
+          </div>
+          <div class="stat">
+            <span class="stat-valor" id="dept-poblacion">—</span>
+            <span class="stat-etiqueta">Población</span>
+          </div>
+          <div class="stat">
+            <span class="stat-valor" id="dept-municipios-count">—</span>
+            <span class="stat-etiqueta">Municipios</span>
+          </div>
+        </div>
+
+        <!-- Lista de municipios -->
+        <div class="municipios-seccion">
+          <h3 class="municipios-titulo">Municipios</h3>
+          <div id="municipios-estado" class="municipios-estado">Cargando...</div>
+          <ul class="municipios-lista" id="municipios-lista" hidden></ul>
+        </div>
+
+        <!-- Botón guardar -->
+        <button class="btn-guardar" id="btn-guardar">
+          Guardar departamento
+        </button>
+
+        <!-- Mensaje de resultado del guardado -->
+        <div class="mensaje" id="mensaje" hidden></div>
+
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Lógica de la app -->
+  <script src="app.js"></script>
+</body>
+</html>

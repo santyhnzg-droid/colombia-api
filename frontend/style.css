@@ -1,0 +1,367 @@
+/* ============================================================
+   style.css — Colombia Interactiva
+   Paleta: verde selva + amarillo sol + azul cielo andino
+   ============================================================ */
+
+/* ── Variables de diseño ── */
+:root {
+  --verde-selva:    #1B5E20;
+  --verde-medio:    #2E7D32;
+  --verde-claro:    #4CAF50;
+  --amarillo-sol:   #F9A825;
+  --amarillo-claro: #FFF9C4;
+  --azul-andino:    #1565C0;
+  --rojo-mapa:      #C62828;
+
+  --fondo:          #F5F7F2;
+  --superficie:     #FFFFFF;
+  --texto-principal:#1A2615;
+  --texto-secundario:#5A6B55;
+  --borde:          #D4E0CE;
+
+  --radio:          10px;
+  --sombra:         0 2px 12px rgba(27, 94, 32, 0.10);
+  --sombra-hover:   0 4px 20px rgba(27, 94, 32, 0.18);
+
+  --fuente-display: 'Georgia', serif;
+  --fuente-cuerpo:  system-ui, -apple-system, sans-serif;
+}
+
+/* ── Reset mínimo ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--fuente-cuerpo);
+  background: var(--fondo);
+  color: var(--texto-principal);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+.header {
+  background: var(--verde-selva);
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 1000;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--amarillo-sol) 33%, var(--azul-andino) 33% 66%, var(--rojo-mapa) 66%);
+}
+
+.header-logo {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.header h1 {
+  font-family: var(--fuente-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.header p {
+  font-size: 0.82rem;
+  opacity: 0.80;
+  margin-top: 2px;
+}
+
+/* ── Layout principal ── */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  flex: 1;
+  height: calc(100vh - 72px);
+  overflow: hidden;
+}
+
+/* ── Mapa ── */
+.mapa-contenedor {
+  position: relative;
+}
+
+#mapa {
+  width: 100%;
+  height: 100%;
+}
+
+/* Cursor personalizado sobre el mapa */
+.leaflet-container {
+  cursor: crosshair !important;
+  font-family: var(--fuente-cuerpo);
+}
+
+/* ── Panel lateral ── */
+.panel {
+  background: var(--superficie);
+  border-left: 1px solid var(--borde);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estado vacío */
+.panel-vacio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  text-align: center;
+  color: var(--texto-secundario);
+  gap: 16px;
+}
+
+.panel-vacio-icono {
+  font-size: 3.5rem;
+  opacity: 0.5;
+}
+
+.panel-vacio p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Contenido del departamento */
+.panel-contenido {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Encabezado del departamento */
+.dept-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--amarillo-sol);
+}
+
+.dept-nombre {
+  font-family: var(--fuente-display);
+  font-size: 1.5rem;
+  color: var(--verde-selva);
+  line-height: 1.2;
+}
+
+.dept-region {
+  display: inline-block;
+  background: var(--verde-selva);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+/* Descripción */
+.dept-descripcion {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--texto-secundario);
+}
+
+/* Stats */
+.dept-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.stat-valor {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--verde-selva);
+  word-break: break-all;
+}
+
+.stat-etiqueta {
+  font-size: 0.68rem;
+  color: var(--texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Municipios */
+.municipios-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.municipios-titulo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-secundario);
+}
+
+.municipios-estado {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  font-style: italic;
+}
+
+.municipios-lista {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.municipios-lista li {
+  background: var(--amarillo-claro);
+  border: 1px solid #F0D060;
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 0.78rem;
+  color: var(--texto-principal);
+}
+
+/* ── Botón guardar ── */
+.btn-guardar {
+  background: var(--verde-medio);
+  color: #fff;
+  border: none;
+  border-radius: var(--radio);
+  padding: 13px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: var(--sombra);
+  width: 100%;
+}
+
+.btn-guardar:hover {
+  background: var(--verde-selva);
+  box-shadow: var(--sombra-hover);
+}
+
+.btn-guardar:active {
+  transform: scale(0.98);
+}
+
+.btn-guardar:disabled {
+  background: #A5D6A7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Mensaje de resultado ── */
+.mensaje {
+  border-radius: var(--radio);
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.mensaje.exito {
+  background: #E8F5E9;
+  border: 1px solid #A5D6A7;
+  color: var(--verde-selva);
+}
+
+.mensaje.error {
+  background: #FFEBEE;
+  border: 1px solid #EF9A9A;
+  color: var(--rojo-mapa);
+}
+
+/* ── Overlay de carga sobre el mapa ── */
+.mapa-cargando {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 247, 242, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 1000;
+  font-size: 0.95rem;
+  color: var(--verde-selva);
+  font-weight: 600;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid var(--borde);
+  border-top-color: var(--verde-selva);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+/* Estilo de las regiones en el mapa */
+.leyenda-mapa {
+  background: white;
+  padding: 10px 14px;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+/* ── Scrollbar suave en el panel ── */
+.panel::-webkit-scrollbar { width: 5px; }
+.panel::-webkit-scrollbar-track { background: var(--fondo); }
+.panel::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 10px; }
+
+/* ── Responsive básico ── */
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 55vh 1fr;
+    height: auto;
+  }
+
+  .panel {
+    border-left: none;
+    border-top: 1px solid var(--borde);
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .dept-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
