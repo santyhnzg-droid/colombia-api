@@ -1,367 +1,171 @@
-/* ============================================================
-   style.css — Colombia Interactiva
-   Paleta: verde selva + amarillo sol + azul cielo andino
-   ============================================================ */
-
-/* ── Variables de diseño ── */
-:root {
-  --verde-selva:    #1B5E20;
-  --verde-medio:    #2E7D32;
-  --verde-claro:    #4CAF50;
-  --amarillo-sol:   #F9A825;
-  --amarillo-claro: #FFF9C4;
-  --azul-andino:    #1565C0;
-  --rojo-mapa:      #C62828;
-
-  --fondo:          #F5F7F2;
-  --superficie:     #FFFFFF;
-  --texto-principal:#1A2615;
-  --texto-secundario:#5A6B55;
-  --borde:          #D4E0CE;
-
-  --radio:          10px;
-  --sombra:         0 2px 12px rgba(27, 94, 32, 0.10);
-  --sombra-hover:   0 4px 20px rgba(27, 94, 32, 0.18);
-
-  --fuente-display: 'Georgia', serif;
-  --fuente-cuerpo:  system-ui, -apple-system, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ── Reset mínimo ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: var(--fuente-cuerpo);
-  background: var(--fondo);
-  color: var(--texto-principal);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+header nav ul{
+    list-style: none;
+    position: fixed;
+    z-index: 1;
 }
 
-/* ── Header ── */
-.header {
-  background: var(--verde-selva);
-  color: #fff;
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  position: relative;
-  z-index: 1000;
+header nav ul li {
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--amarillo-sol) 33%, var(--azul-andino) 33% 66%, var(--rojo-mapa) 66%);
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.116);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: transform 0.18s ease;
+    will-change: transform;
+    cursor: default;
 }
 
-.header-logo {
-  font-size: 2rem;
-  line-height: 1;
+header nav ul li a:hover {
+    transform: translateX(10px);
+    cursor: pointer;
 }
 
-.header h1 {
-  font-family: var(--fuente-display);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+
+.background {
+    height: 750px;
+    width: 100%;
+    background: #fcf881;
+    background: radial-gradient(circle, rgba(252, 248, 129, 1) 0%, rgba(154, 150, 255, 1) 53%, rgba(255, 135, 159, 1) 100%);
+    filter: brightness(0.3);
 }
 
-.header p {
-  font-size: 0.82rem;
-  opacity: 0.80;
-  margin-top: 2px;
+/* Circles layer inside .background */
+.background { position: relative; overflow: hidden; }
+.circles { position: absolute; inset: 0; pointer-events: none; }
+.circle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.116);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.534);
+    transform: translate(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, 0px)));
+    will-change: transform, opacity;
+    pointer-events: auto;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #222;
+    z-index: 1000;
 }
 
-/* ── Layout principal ── */
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  flex: 1;
-  height: calc(100vh - 72px);
-  overflow: hidden;
+.circle:active { cursor: grabbing; }
+
+.colombiaMap {
+    display:block;
+    max-width: 900px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 100px 30px rgb(255, 255, 255));
 }
 
-/* ── Mapa ── */
-.mapa-contenedor {
-  position: relative;
+body.drag-enabled .circle{ box-shadow: 0 8px 18px rgba(0,0,0,0.18); background: rgba(255,255,255,0.9); }
+
+.circles .circle:hover {
+    background-color: white;
+    cursor: pointer;
+}
+.circles .circle:nth-child(1){ --x: 81px; --y: 203px; }
+.circles .circle:nth-child(2){ --x: -124px; --y: -98px; }
+.circles .circle:nth-child(3){ --x: 69px; --y: -119px; }
+.circles .circle:nth-child(4){ --x: -113px; --y: -266px; }
+.circles .circle:nth-child(5){ --x: -75px; --y: -183px; }
+.circles .circle:nth-child(6){ --x: -14px; --y: -72px; }
+.circles .circle:nth-child(7){ --x: -108px; --y: -48px; }
+.circles .circle:nth-child(8){ --x: -32px; --y: 129px; }
+
+.circles .circle:nth-child(9){ --x: 45px; --y: -72px; }
+.circles .circle:nth-child(10){ --x: -164px; --y: 75px; }
+.circles .circle:nth-child(11){ --x: -46px; --y: -233px; }
+.circles .circle:nth-child(12){ --x: -168px; --y: -45px; }
+.circles .circle:nth-child(13){ --x: -140px; --y: -174px; }
+.circles .circle:nth-child(14){ --x: -61px; --y: -28px; }
+.circles .circle:nth-child(15){ --x: 192px; --y: 1px; }
+.circles .circle:nth-child(16){ --x: 42px; --y: 73px; }
+
+.circles .circle:nth-child(17){ --x: -104px; --y: 57px; }
+.circles .circle:nth-child(18){ --x: -15px; --y: -304px; }
+.circles .circle:nth-child(19){ --x: -84px; --y: -263px; }
+.circles .circle:nth-child(20){ --x: 4px; --y: 10px; }
+.circles .circle:nth-child(21){ --x: -207px; --y: 123px; }
+.circles .circle:nth-child(22){ --x: -16px; --y: -171px; }
+.circles .circle:nth-child(23){ --x: -101px; --y: 153px; }
+.circles .circle:nth-child(24){ --x: -120px; --y: -8px; }
+
+.circles .circle:nth-child(25){ --x: -131px; --y: -32px; }
+.circles .circle:nth-child(26){ --x: -188px; --y: -260px; }
+.circles .circle:nth-child(27){ --x: -32px; --y: -111px; }
+.circles .circle:nth-child(28){ --x: -116px; --y: -211px; }
+.circles .circle:nth-child(29){ --x: -99px; --y: 14px; }
+.circles .circle:nth-child(30){ --x: -155px; --y: 25px; }
+.circles .circle:nth-child(31){ --x: 104px; --y: 121px; }
+.circles .circle:nth-child(32){ --x: 147px; --y: -53px; }
+
+.colombiaMap{
+    position: absolute;
+    top: 0px;
+    height: 700px;
+    width: auto;
+    right: 400px;
+    filter: invert(1);
+    z-index: 1;
 }
 
-#mapa {
-  width: 100%;
-  height: 100%;
+.card {
+    position: fixed;
+    color: white;
+    top: 40px;
+    right: 50px;
+    width: 400px;
+    height: 650px;
+    background-color: rgba(255, 255, 255, 0.116);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 2;
 }
 
-/* Cursor personalizado sobre el mapa */
-.leaflet-container {
-  cursor: crosshair !important;
-  font-family: var(--fuente-cuerpo);
-}
-
-/* ── Panel lateral ── */
-.panel {
-  background: var(--superficie);
-  border-left: 1px solid var(--borde);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Estado vacío */
-.panel-vacio {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-  text-align: center;
-  color: var(--texto-secundario);
-  gap: 16px;
-}
-
-.panel-vacio-icono {
-  font-size: 3.5rem;
-  opacity: 0.5;
-}
-
-.panel-vacio p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-/* Contenido del departamento */
-.panel-contenido {
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* Encabezado del departamento */
-.dept-header {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--amarillo-sol);
-}
-
-.dept-nombre {
-  font-family: var(--fuente-display);
-  font-size: 1.5rem;
-  color: var(--verde-selva);
-  line-height: 1.2;
-}
-
-.dept-region {
-  display: inline-block;
-  background: var(--verde-selva);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 20px;
-  width: fit-content;
-}
-
-/* Descripción */
-.dept-descripcion {
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: var(--texto-secundario);
-}
-
-/* Stats */
-.dept-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.stat {
-  background: var(--fondo);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio);
-  padding: 12px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 4px;
-}
-
-.stat-valor {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--verde-selva);
-  word-break: break-all;
-}
-
-.stat-etiqueta {
-  font-size: 0.68rem;
-  color: var(--texto-secundario);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-/* Municipios */
-.municipios-seccion {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.municipios-titulo {
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--texto-secundario);
-}
-
-.municipios-estado {
-  font-size: 0.85rem;
-  color: var(--texto-secundario);
-  font-style: italic;
-}
-
-.municipios-lista {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  max-height: 160px;
-  overflow-y: auto;
-  padding: 2px;
-}
-
-.municipios-lista li {
-  background: var(--amarillo-claro);
-  border: 1px solid #F0D060;
-  border-radius: 6px;
-  padding: 3px 9px;
-  font-size: 0.78rem;
-  color: var(--texto-principal);
-}
-
-/* ── Botón guardar ── */
-.btn-guardar {
-  background: var(--verde-medio);
-  color: #fff;
-  border: none;
-  border-radius: var(--radio);
-  padding: 13px 20px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-  box-shadow: var(--sombra);
-  width: 100%;
-}
-
-.btn-guardar:hover {
-  background: var(--verde-selva);
-  box-shadow: var(--sombra-hover);
-}
-
-.btn-guardar:active {
-  transform: scale(0.98);
-}
-
-.btn-guardar:disabled {
-  background: #A5D6A7;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* ── Mensaje de resultado ── */
-.mensaje {
-  border-radius: var(--radio);
-  padding: 12px 14px;
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-
-.mensaje.exito {
-  background: #E8F5E9;
-  border: 1px solid #A5D6A7;
-  color: var(--verde-selva);
-}
-
-.mensaje.error {
-  background: #FFEBEE;
-  border: 1px solid #EF9A9A;
-  color: var(--rojo-mapa);
-}
-
-/* ── Overlay de carga sobre el mapa ── */
-.mapa-cargando {
-  position: absolute;
-  inset: 0;
-  background: rgba(245, 247, 242, 0.85);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  z-index: 1000;
-  font-size: 0.95rem;
-  color: var(--verde-selva);
-  font-weight: 600;
-}
-
-.spinner {
-  width: 36px;
-  height: 36px;
-  border: 4px solid var(--borde);
-  border-top-color: var(--verde-selva);
-  border-radius: 50%;
-  animation: girar 0.8s linear infinite;
-}
-
-@keyframes girar {
-  to { transform: rotate(360deg); }
-}
-
-/* Estilo de las regiones en el mapa */
-.leyenda-mapa {
-  background: white;
-  padding: 10px 14px;
-  border-radius: var(--radio);
-  box-shadow: var(--sombra);
-  font-size: 0.8rem;
-  line-height: 1.8;
-}
-
-/* ── Scrollbar suave en el panel ── */
-.panel::-webkit-scrollbar { width: 5px; }
-.panel::-webkit-scrollbar-track { background: var(--fondo); }
-.panel::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 10px; }
-
-/* ── Responsive básico ── */
-@media (max-width: 768px) {
-  .layout {
-    grid-template-columns: 1fr;
-    grid-template-rows: 55vh 1fr;
+.card img {
+    width: 100%;
     height: auto;
-  }
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
 
-  .panel {
-    border-left: none;
-    border-top: 1px solid var(--borde);
-    height: auto;
-    overflow-y: visible;
-  }
+.card h2 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
 
-  .dept-stats {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.card p {
+    margin-bottom: 30px;
 }

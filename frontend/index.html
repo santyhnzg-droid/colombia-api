@@ -1,90 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Colombia Interactiva</title>
-
-  <!-- Leaflet CSS (mapa) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColombiAPI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="">Departamentos</a></li>
+                <li><a href="">Regiones</a></li>
+                <li><a href="">Atracciones turisticas</a></li>
+                <li><a href="">Centros urbanos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="background"></div>
+            <img src="img/colombia-map.png" class="colombiaMap" draggable="false">
+                <div class="circles">
+                    <!-- un circulo por departamento, en este orden: https://ahoraeg.com/viajes/geografia-y-poblacion/departamentos-de-colombia/-->
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
 
-  <header class="header">
-    <div class="header-logo">🇨🇴</div>
-    <div class="header-text">
-      <h1>Colombia Interactiva</h1>
-      <p>Haz clic en un departamento para explorar su información</p>
-    </div>
-  </header>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
 
-  <main class="layout">
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
 
-    <!-- Mapa -->
-    <section class="mapa-contenedor">
-      <div id="mapa"></div>
-    </section>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                    <span class="circle"></span>
+                </div>
 
-    <!-- Panel lateral -->
-    <aside class="panel" id="panel">
+                <article class="card">
+                    <img src="img/arauca-1024x499.webp" alt="">
+                    <h2>Arauca</h2>
+                    <p>Arauca es uno de los treinta y dos departamentos que, junto con Bogotá, Distrito Capital, forman la República de Colombia. Su capital es la homónima Arauca. Está ubicado al este del país, en la región Orinoquía, limitando al norte y este con Venezuela, al sur con Vichada y Casanare, y al oeste con Boyacá</p>
+                    <h3>Capital:</h3>
+                    <p>La ciudad de arauca</p>
+                    <h3>Municipalidades:</h3>
+                    <p>7</p>
+                    <h3>Poblacion:</h3>
+                    <p>304978</p>
+                </article>
 
-      <!-- Estado inicial -->
-      <div class="panel-vacio" id="panel-vacio">
-        <span class="panel-vacio-icono">🗺️</span>
-        <p>Selecciona un departamento en el mapa para ver su información.</p>
-      </div>
-
-      <!-- Contenido del departamento seleccionado (oculto hasta que se seleccione) -->
-      <div class="panel-contenido" id="panel-contenido" hidden>
-
-        <div class="dept-header">
-          <h2 class="dept-nombre" id="dept-nombre">—</h2>
-          <span class="dept-region" id="dept-region">—</span>
-        </div>
-
-        <p class="dept-descripcion" id="dept-descripcion">—</p>
-
-        <div class="dept-stats">
-          <div class="stat">
-            <span class="stat-valor" id="dept-superficie">—</span>
-            <span class="stat-etiqueta">Superficie (km²)</span>
-          </div>
-          <div class="stat">
-            <span class="stat-valor" id="dept-poblacion">—</span>
-            <span class="stat-etiqueta">Población</span>
-          </div>
-          <div class="stat">
-            <span class="stat-valor" id="dept-municipios-count">—</span>
-            <span class="stat-etiqueta">Municipios</span>
-          </div>
-        </div>
-
-        <!-- Lista de municipios -->
-        <div class="municipios-seccion">
-          <h3 class="municipios-titulo">Municipios</h3>
-          <div id="municipios-estado" class="municipios-estado">Cargando...</div>
-          <ul class="municipios-lista" id="municipios-lista" hidden></ul>
-        </div>
-
-        <!-- Botón guardar -->
-        <button class="btn-guardar" id="btn-guardar">
-          Guardar departamento
-        </button>
-
-        <!-- Mensaje de resultado del guardado -->
-        <div class="mensaje" id="mensaje" hidden></div>
-
-      </div>
-
-    </aside>
-
-  </main>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Lógica de la app -->
-  <script src="app.js"></script>
+        </section>
+    </main>
 </body>
 </html>
