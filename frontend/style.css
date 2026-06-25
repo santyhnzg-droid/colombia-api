@@ -5,7 +5,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-header nav ul{
+html, body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+}
+
+header nav ul {
     list-style: none;
     position: fixed;
     z-index: 1;
@@ -37,18 +43,22 @@ header nav ul li a:hover {
     cursor: pointer;
 }
 
-
 .background {
     height: 750px;
     width: 100%;
-    background: #fcf881;
     background: radial-gradient(circle, rgba(252, 248, 129, 1) 0%, rgba(154, 150, 255, 1) 53%, rgba(255, 135, 159, 1) 100%);
     filter: brightness(0.3);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Circles layer inside .background */
-.background { position: relative; overflow: hidden; }
-.circles { position: absolute; inset: 0; pointer-events: none; }
+/* Capa de círculos sobre el mapa */
+.circles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
 .circle {
     position: absolute;
     left: 50%;
@@ -62,88 +72,115 @@ header nav ul li a:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.534);
     transform: translate(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, 0px)));
-    will-change: transform, opacity;
     pointer-events: auto;
-    cursor: grab;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    color: #222;
+    cursor: pointer;
     z-index: 1000;
 }
 
-.circle:active { cursor: grabbing; }
+.circle:hover {
+    background-color: white;
+}
+
+/* Tooltip con el nombre del departamento al pasar el mouse */
+.circle::after {
+    content: attr(data-name);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease, transform 160ms ease;
+    z-index: 1500;
+}
+
+.circle:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* Posición de cada departamento (por id, no por orden en el HTML) */
+#amazonas              { --x: 81px;   --y: 203px; }
+#antioquia             { --x: -124px; --y: -98px; }
+#arauca                { --x: 69px;   --y: -119px; }
+#atlantico             { --x: -113px; --y: -266px; }
+#bolivar               { --x: -75px;  --y: -183px; }
+#boyaca                { --x: -14px;  --y: -72px; }
+#caldas                { --x: -108px; --y: -48px; }
+#caqueta               { --x: -32px;  --y: 129px; }
+#casanare              { --x: 45px;   --y: -72px; }
+#cauca                 { --x: -164px; --y: 75px; }
+#cesar                 { --x: -46px;  --y: -233px; }
+#choco                 { --x: -168px; --y: -45px; }
+#cordoba               { --x: -140px; --y: -174px; }
+#cundinamarca          { --x: -61px;  --y: -28px; }
+#guainia               { --x: 192px;  --y: 1px; }
+#guaviare              { --x: 42px;   --y: 73px; }
+#huila                 { --x: -104px; --y: 57px; }
+#la-guajira            { --x: -15px;  --y: -304px; }
+#magdalena             { --x: -84px;  --y: -263px; }
+#meta                  { --x: 4px;    --y: 10px; }
+#narino                { --x: -207px; --y: 123px; }
+#norte-de-santander    { --x: -16px;  --y: -171px; }
+#putumayo              { --x: -101px; --y: 153px; }
+#quindio               { --x: -120px; --y: -8px; }
+#risaralda             { --x: -131px; --y: -32px; }
+#san-andres-y-providencia { --x: -188px; --y: -260px; }
+#santander             { --x: -32px;  --y: -111px; }
+#sucre                 { --x: -116px; --y: -211px; }
+#tolima                { --x: -99px;  --y: 14px; }
+#valle-del-cauca       { --x: -155px; --y: 25px; }
+#vaupes                { --x: 104px;  --y: 121px; }
+#vichada               { --x: 147px;  --y: -53px; }
 
 .colombiaMap {
-    display:block;
-    max-width: 900px;
-    width: 80%;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 100px 30px rgb(255, 255, 255));
-}
-
-body.drag-enabled .circle{ box-shadow: 0 8px 18px rgba(0,0,0,0.18); background: rgba(255,255,255,0.9); }
-
-.circles .circle:hover {
-    background-color: white;
-    cursor: pointer;
-}
-.circles .circle:nth-child(1){ --x: 81px; --y: 203px; }
-.circles .circle:nth-child(2){ --x: -124px; --y: -98px; }
-.circles .circle:nth-child(3){ --x: 69px; --y: -119px; }
-.circles .circle:nth-child(4){ --x: -113px; --y: -266px; }
-.circles .circle:nth-child(5){ --x: -75px; --y: -183px; }
-.circles .circle:nth-child(6){ --x: -14px; --y: -72px; }
-.circles .circle:nth-child(7){ --x: -108px; --y: -48px; }
-.circles .circle:nth-child(8){ --x: -32px; --y: 129px; }
-
-.circles .circle:nth-child(9){ --x: 45px; --y: -72px; }
-.circles .circle:nth-child(10){ --x: -164px; --y: 75px; }
-.circles .circle:nth-child(11){ --x: -46px; --y: -233px; }
-.circles .circle:nth-child(12){ --x: -168px; --y: -45px; }
-.circles .circle:nth-child(13){ --x: -140px; --y: -174px; }
-.circles .circle:nth-child(14){ --x: -61px; --y: -28px; }
-.circles .circle:nth-child(15){ --x: 192px; --y: 1px; }
-.circles .circle:nth-child(16){ --x: 42px; --y: 73px; }
-
-.circles .circle:nth-child(17){ --x: -104px; --y: 57px; }
-.circles .circle:nth-child(18){ --x: -15px; --y: -304px; }
-.circles .circle:nth-child(19){ --x: -84px; --y: -263px; }
-.circles .circle:nth-child(20){ --x: 4px; --y: 10px; }
-.circles .circle:nth-child(21){ --x: -207px; --y: 123px; }
-.circles .circle:nth-child(22){ --x: -16px; --y: -171px; }
-.circles .circle:nth-child(23){ --x: -101px; --y: 153px; }
-.circles .circle:nth-child(24){ --x: -120px; --y: -8px; }
-
-.circles .circle:nth-child(25){ --x: -131px; --y: -32px; }
-.circles .circle:nth-child(26){ --x: -188px; --y: -260px; }
-.circles .circle:nth-child(27){ --x: -32px; --y: -111px; }
-.circles .circle:nth-child(28){ --x: -116px; --y: -211px; }
-.circles .circle:nth-child(29){ --x: -99px; --y: 14px; }
-.circles .circle:nth-child(30){ --x: -155px; --y: 25px; }
-.circles .circle:nth-child(31){ --x: 104px; --y: 121px; }
-.circles .circle:nth-child(32){ --x: 147px; --y: -53px; }
-
-.colombiaMap{
+    display: block;
     position: absolute;
-    top: 0px;
+    top: 0;
+    right: -20px;
+    margin: 0 auto;
+    left: 0;
     height: 700px;
     width: auto;
-    right: 400px;
-    filter: invert(1);
     z-index: 1;
+    filter: invert(1) drop-shadow(0 0 10px rgb(0, 0, 0));
+}
+
+.attractions-page .colombiaMap {
+    right: 410px;
+    left: auto;
+    margin: 0;
+}
+
+/* Foto del departamento seleccionado, abajo a la izquierda */
+.image-department {
+    display: none;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 280px;
+    max-width: 30vw;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 200;
 }
 
 .card {
     position: fixed;
     color: white;
     top: 40px;
-    right: 50px;
-    width: 400px;
-    height: 650px;
+    right: 10px;
+    width: 420px;
+    max-height: calc(100% - 80px);
+    overflow-y: auto;
     background-color: rgba(255, 255, 255, 0.116);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -154,18 +191,159 @@ body.drag-enabled .circle{ box-shadow: 0 8px 18px rgba(0,0,0,0.18); background: 
     z-index: 2;
 }
 
-.card img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
+.card h2 {
+    margin-bottom: 12px;
 }
 
-.card h2 {
-    margin-top: 10px;
-    margin-bottom: 20px;
+.card h3 {
+    margin-top: 14px;
+    font-size: 14px;
+    opacity: 0.8;
 }
 
 .card p {
-    margin-bottom: 30px;
+    margin-bottom: 6px;
+}
+
+.mensaje {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.mensaje.error {
+    background: rgba(255, 80, 80, 0.25);
+}
+
+.mensaje.exito {
+    background: rgba(80, 255, 140, 0.25);
+}
+
+.btn-guardar {
+    margin-top: 16px;
+    background-color: rgba(255, 255, 255, 0.116);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 16px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-guardar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Panel de atracciones (lado derecho) */
+.attractions-panel {
+    position: fixed;
+    right: 10px;
+    top: 40px;
+    width: 420px;
+    height: calc(100% - 80px);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    padding: 16px;
+    border-radius: 10px;
+    overflow-y: auto;
+    z-index: 3;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.attractions-panel h2 {
+    margin-bottom: 12px;
+}
+
+.attractions-panel .placeholder {
+    opacity: 0.8;
+}
+
+.attractions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.attraction-card {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background 0.15s ease;
+}
+
+.attraction-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.attraction-card img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.attraction-card h4 {
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Ventana emergente (modal) de la atracción seleccionada */
+.attraction-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4000;
+}
+
+.attraction-modal[hidden] {
+    display: none !important;
+    pointer-events: none;
+}
+
+.attraction-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.attraction-modal__content {
+    position: relative;
+    background: #fff;
+    color: #111;
+    max-width: 720px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 18px;
+    z-index: 1;
+}
+
+.attraction-modal__close {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.attraction-modal__content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px 0;
 }

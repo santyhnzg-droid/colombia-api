@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColombiAPI - Atracciones turísticas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="attractions-page">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Departamentos</a></li>
+                <li><a href="atracciones.html">Atracciones turisticas</a></li>
+                <li><a href="centros-urbanos.html">Centros urbanos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="background"></div>
+            <img src="img/colombia-map.png" class="colombiaMap" draggable="false">
+            <div class="circles">
+                <!-- 32 departamentos de Colombia en orden alfabético -->
+                <span id="amazonas" class="circle" data-name="Amazonas" title="Amazonas"></span>
+                <span id="antioquia" class="circle" data-name="Antioquia" title="Antioquia"></span>
+                <span id="arauca" class="circle" data-name="Arauca" title="Arauca"></span>
+                <span id="atlantico" class="circle" data-name="Atlántico" title="Atlántico"></span>
+                <span id="bolivar" class="circle" data-name="Bolívar" title="Bolívar"></span>
+                <span id="boyaca" class="circle" data-name="Boyacá" title="Boyacá"></span>
+                <span id="caldas" class="circle" data-name="Caldas" title="Caldas"></span>
+                <span id="caqueta" class="circle" data-name="Caquetá" title="Caquetá"></span>
+
+                <span id="casanare" class="circle" data-name="Casanare" title="Casanare"></span>
+                <span id="cauca" class="circle" data-name="Cauca" title="Cauca"></span>
+                <span id="cesar" class="circle" data-name="Cesar" title="Cesar"></span>
+                <span id="choco" class="circle" data-name="Chocó" title="Chocó"></span>
+                <span id="cordoba" class="circle" data-name="Córdoba" title="Córdoba"></span>
+                <span id="cundinamarca" class="circle" data-name="Cundinamarca" title="Cundinamarca"></span>
+                <span id="guainia" class="circle" data-name="Guainía" title="Guainía"></span>
+                <span id="guaviare" class="circle" data-name="Guaviare" title="Guaviare"></span>
+
+                <span id="huila" class="circle" data-name="Huila" title="Huila"></span>
+                <span id="la-guajira" class="circle" data-name="La Guajira" title="La Guajira"></span>
+                <span id="magdalena" class="circle" data-name="Magdalena" title="Magdalena"></span>
+                <span id="meta" class="circle" data-name="Meta" title="Meta"></span>
+                <span id="narino" class="circle" data-name="Nariño" title="Nariño"></span>
+                <span id="norte-de-santander" class="circle" data-name="Norte de Santander" title="Norte de Santander"></span>
+                <span id="putumayo" class="circle" data-name="Putumayo" title="Putumayo"></span>
+                <span id="quindio" class="circle" data-name="Quindío" title="Quindío"></span>
+
+                <span id="risaralda" class="circle" data-name="Risaralda" title="Risaralda"></span>
+                <span id="san-andres-y-providencia" class="circle" data-name="San Andrés y Providencia" title="San Andrés y Providencia"></span>
+                <span id="santander" class="circle" data-name="Santander" title="Santander"></span>
+                <span id="sucre" class="circle" data-name="Sucre" title="Sucre"></span>
+                <span id="tolima" class="circle" data-name="Tolima" title="Tolima"></span>
+                <span id="valle-del-cauca" class="circle" data-name="Valle del Cauca" title="Valle del Cauca"></span>
+                <span id="vaupes" class="circle" data-name="Vaupés" title="Vaupés"></span>
+                <span id="vichada" class="circle" data-name="Vichada" title="Vichada"></span>
+            </div>
+
+            <!-- Panel de atracciones del departamento seleccionado -->
+            <aside class="attractions-panel">
+                <h2 id="attractions-title">Atracciones</h2>
+                <div id="attractions-grid" class="attractions-grid">
+                    <p class="placeholder">Selecciona un departamento para ver sus atracciones.</p>
+                </div>
+            </aside>
+
+            <!-- Ventana emergente con el detalle de la atracción -->
+            <div id="attraction-modal" class="attraction-modal" hidden>
+                <div class="attraction-modal__backdrop"></div>
+                <div class="attraction-modal__content">
+                    <button id="attraction-modal-close" class="attraction-modal__close">×</button>
+                    <h3 id="attraction-modal-title"></h3>
+                    <img id="attraction-modal-image" src="" alt="">
+                    <p id="attraction-modal-description"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
