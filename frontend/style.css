@@ -52,7 +52,6 @@ header nav ul li a:hover {
     overflow: hidden;
 }
 
-/* Capa de círculos sobre el mapa */
 .circles {
     position: absolute;
     inset: 0;
@@ -81,7 +80,6 @@ header nav ul li a:hover {
     background-color: white;
 }
 
-/* Tooltip con el nombre del departamento al pasar el mouse */
 .circle::after {
     content: attr(data-name);
     position: absolute;
@@ -106,7 +104,6 @@ header nav ul li a:hover {
     transform: translateX(-50%) translateY(-4px);
 }
 
-/* Posición de cada departamento (por id, no por orden en el HTML) */
 #amazonas              { --x: 81px;   --y: 203px; }
 #antioquia             { --x: -124px; --y: -98px; }
 #arauca                { --x: 69px;   --y: -119px; }
@@ -159,7 +156,6 @@ header nav ul li a:hover {
     margin: 0;
 }
 
-/* Foto del departamento seleccionado, abajo a la izquierda */
 .image-department {
     display: none;
     position: fixed;
@@ -238,7 +234,6 @@ header nav ul li a:hover {
     cursor: not-allowed;
 }
 
-/* Panel de atracciones (lado derecho) */
 .attractions-panel {
     position: fixed;
     right: 10px;
@@ -297,7 +292,6 @@ header nav ul li a:hover {
     margin: 0;
 }
 
-/* Ventana emergente (modal) de la atracción seleccionada */
 .attraction-modal {
     position: fixed;
     inset: 0;
